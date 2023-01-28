@@ -61,10 +61,6 @@ body>main {
     padding: 0;
 }
 
-.grid-16 {
-    grid-template-columns: repeat(16,1fr);
-}
-
 .content {
     display: flex;
 }
@@ -76,5 +72,5 @@ body>main {
 }
 
 .square {
-    border: 1px ridge;
+    border: 1px dotted var(--modal-overlay-background-color);
 }
