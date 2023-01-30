@@ -9,6 +9,8 @@ const btnClear = document.querySelector("#btn-clear");
 const btnColor = document.querySelector("#btn-color");
 const colorContainer = document.querySelector(".color-container");
 const colorInput = document.querySelector("#color-input");
+const btnGrid = document.querySelector("#toggle-grid");
+const gridIcon = document.querySelector("#grid-icon");
 let squareList = [];
 let allSquares = null;
 let down = false;
@@ -139,6 +141,22 @@ btnColor.addEventListener("click", () => {
 colorInput.addEventListener("change", (e) => {
     color = e.target.value;
 });
+
+btnGrid.addEventListener("click", () => {
+    if (gridIcon.classList.contains("fa-eye-slash")) {
+        gridIcon.classList.replace("fa-eye-slash","fa-eye");
+        allSquares.forEach((square) => {
+            square.classList.remove("square-border");
+            btnGrid.setAttribute("data-tooltip","Show grid");
+        });
+    } else {
+        gridIcon.classList.replace("fa-eye","fa-eye-slash");
+        allSquares.forEach((square) => {
+            square.classList.add("square-border");
+            btnGrid.setAttribute("data-tooltip","Hide grid");
+        });
+    }
+})
 
 gridContainer.addEventListener("mousedown", downListener);
 

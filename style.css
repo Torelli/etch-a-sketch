@@ -41,7 +41,7 @@ body>main {
     padding-top: 30px;
 }
 
-#theme-btn {
+#theme-btn, #toggle-grid {
     cursor: pointer;
     text-decoration: none;
 }
@@ -60,6 +60,7 @@ body>main {
     height: 400px;
     display: grid;
     padding: 0;
+    z-index: 5;
 }
 
 .content {
@@ -72,8 +73,8 @@ body>main {
     align-items: center;
 }
 
-.square {
-    border: 1px dotted var(--modal-overlay-background-color);
+.square-border {
+    border: 1px dotted rgba(0,0,0,0.1);
 }
 
 .options {
@@ -87,18 +88,31 @@ body>main {
     padding-bottom: 0.35rem;
 }
 
-.color-container {
+.color-container, #toggle-grid {
     transition: all 0.5s;
     position: absolute;
     width: 100px;
     height: 46px;
-    top:165px;
-    left:215px;
+    /* top:165px;
+    left:215px; */
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     padding: 5px 5px 5px 60px;
     z-index: 4;
+}
+
+#toggle-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top:165px;
+    right:315px;
+}
+
+.color-container {
+    top:165px;
+    left:215px;
 }
 
 #color-input:focus {
