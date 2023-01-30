@@ -3,8 +3,8 @@ const themeButton = document.querySelector("#theme-btn");
 const gridContainer = document.querySelector(".grid-container");
 const sizeDisplay = document.querySelector("#size-display");
 const sizeRange = document.querySelector("#size-range");
-const squareList = [];
-let allSquares;
+let squareList = [];
+let allSquares = null;
 let down = false;
 let downListener = () => down = true;
 let upListener = () => down = false;
@@ -20,6 +20,16 @@ function clearGrid() {
 }
 
 function changeSize(size) {
+    if (allSquares != null) {
+        allSquares.forEach((square) => {
+            square.removeEventListener("mouseover",() => {
+            if(down) changeColor(square);
+            });
+            square.removeEventListener("click", () => changeColor(square));
+        });
+        allSquares = null;
+    }
+    squareList = [];
     if(size == 1) {
         gridContainer.setAttribute("style",`grid-template-columns: 1fr;`);
         squareList.push(document.createElement("div"));
@@ -35,6 +45,12 @@ function changeSize(size) {
         }
     }
     allSquares = document.querySelectorAll(".square");
+    allSquares.forEach((square) => {
+        square.addEventListener("mouseover",() => {
+        if(down) changeColor(square);
+        });
+        square.addEventListener("click", () => changeColor(square));
+    });
 }
 
 themeButton.addEventListener('click', () => {
@@ -62,11 +78,3 @@ sizeRange.addEventListener("change", (e) => {
 gridContainer.addEventListener("mousedown", downListener);
 
 document.body.addEventListener("mouseup", upListener);
-
-
-allSquares.forEach((square) => {
-    square.addEventListener("mouseover",() => {
-        if(down) changeColor(square);
-    });
-    square.addEventListener("click", () => changeColor(square));
-});
