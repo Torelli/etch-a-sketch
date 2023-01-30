@@ -13,6 +13,13 @@ let downListener = () => down = true;
 let upListener = () => down = false;
 let color = "var(--color)";
 
+function randomizeColor() {
+    let red = Math.floor((Math.random() * 255) + 1);
+    let green = Math.floor((Math.random() * 255) + 1);
+    let blue = Math.floor((Math.random() * 255) + 1);
+    color = `rgb(${red},${green},${blue})`;
+}
+
 function changeColor(square) {
     square.setAttribute("style",`background-color: ${color}`);
 }
@@ -55,7 +62,8 @@ function getSquares () {
     allSquares = document.querySelectorAll(".square");
     allSquares.forEach((square) => {
         square.addEventListener("mouseover",() => {
-        if(down) changeColor(square);
+            if(!(btnRainbow.classList.contains("outline"))) randomizeColor();
+            if(down) changeColor(square);
         });
         square.addEventListener("click", () => changeColor(square));
     });
