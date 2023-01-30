@@ -6,12 +6,16 @@ const sizeRange = document.querySelector("#size-range");
 const btnRainbow = document.querySelector("#btn-rainbow");
 const btnErase = document.querySelector("#btn-erase");
 const btnClear = document.querySelector("#btn-clear");
+const btnColor = document.querySelector("#btn-color");
+const colorContainer = document.querySelector(".color-container");
+const colorInput = document.querySelector("#color-input");
 let squareList = [];
 let allSquares = null;
 let down = false;
 let downListener = () => down = true;
 let upListener = () => down = false;
-let color = "var(--color)";
+let color = "#1b2832";
+colorInput.value = "#1b2832";
 
 function randomizeColor() {
     let red = Math.floor((Math.random() * 255) + 1);
@@ -94,11 +98,19 @@ sizeRange.addEventListener("change", (e) => {
 btnRainbow.addEventListener("click", () => {
     btnRainbow.classList.remove("outline");
     if (!(btnErase.classList.contains("outline"))) btnErase.classList.add("outline");
+    if (!(btnColor.classList.contains("outline"))) {
+        btnColor.classList.add("outline");
+        colorContainer.setAttribute("style","left: 50px;");
+    } 
 });
 
 btnErase.addEventListener("click", () => {
     btnErase.classList.remove("outline");
     if (!(btnRainbow.classList.contains("outline"))) btnRainbow.classList.add("outline");
+    if (!(btnColor.classList.contains("outline"))) {
+        btnColor.classList.add("outline");
+        colorContainer.setAttribute("style","left: 50px;");
+    } 
     color = "none";
 });
 
@@ -107,6 +119,25 @@ btnClear.addEventListener("click", () => {
     setTimeout(() => btnClear.classList.add("outline"), 200);
     clearGrid();
     changeSize(sizeRange.getAttribute("value"));
+});
+
+btnColor.addEventListener("mouseover", () => {
+    if(btnColor.classList.contains("outline")) colorContainer.setAttribute("style","left: 215px;");
+});
+
+btnColor.addEventListener("mouseout", () => {
+    if(btnColor.classList.contains("outline")) colorContainer.setAttribute("style","left: 50px;");
+});
+
+btnColor.addEventListener("click", () => {
+    btnColor.classList.remove("outline");
+    if (!(btnRainbow.classList.contains("outline"))) btnRainbow.classList.add("outline");
+    if (!(btnErase.classList.contains("outline"))) btnErase.classList.add("outline");
+    colorContainer.setAttribute("style","left: 215px;");
+});
+
+colorInput.addEventListener("change", (e) => {
+    color = e.target.value;
 });
 
 gridContainer.addEventListener("mousedown", downListener);
