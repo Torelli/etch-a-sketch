@@ -11,9 +11,10 @@ let allSquares = null;
 let down = false;
 let downListener = () => down = true;
 let upListener = () => down = false;
+let color = "var(--color)";
 
 function changeColor(square) {
-    square.setAttribute("style","background-color: var(--color)");
+    square.setAttribute("style",`background-color: ${color}`);
 }
 
 function clearGrid() {
@@ -90,6 +91,7 @@ btnRainbow.addEventListener("click", () => {
 btnErase.addEventListener("click", () => {
     btnErase.classList.remove("outline");
     if (!(btnRainbow.classList.contains("outline"))) btnRainbow.classList.add("outline");
+    color = "none";
 });
 
 btnClear.addEventListener("click", () => {
