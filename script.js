@@ -3,6 +3,9 @@ const themeButton = document.querySelector("#theme-btn");
 const gridContainer = document.querySelector(".grid-container");
 const sizeDisplay = document.querySelector("#size-display");
 const sizeRange = document.querySelector("#size-range");
+const btnRainbow = document.querySelector("#btn-rainbow");
+const btnErase = document.querySelector("#btn-erase");
+const btnClear = document.querySelector("#btn-clear");
 let squareList = [];
 let allSquares = null;
 let down = false;
@@ -10,7 +13,7 @@ let downListener = () => down = true;
 let upListener = () => down = false;
 
 function changeColor(square) {
-    square.setAttribute("style","background-color: black;");
+    square.setAttribute("style","background-color: var(--color)");
 }
 
 function clearGrid() {
@@ -44,6 +47,10 @@ function changeSize(size) {
             gridContainer.appendChild(squareList[i]);
         }
     }
+    getSquares();
+}
+
+function getSquares () {
     allSquares = document.querySelectorAll(".square");
     allSquares.forEach((square) => {
         square.addEventListener("mouseover",() => {
@@ -70,9 +77,26 @@ sizeRange.addEventListener("mousemove", (e) => {
 });
 
 sizeRange.addEventListener("change", (e) => {
+    sizeRange.setAttribute("value",e.target.value);
     clearGrid();
-    // console.log(e.target.value);
     changeSize(e.target.value);
+});
+
+btnRainbow.addEventListener("click", () => {
+    btnRainbow.classList.remove("outline");
+    if (!(btnErase.classList.contains("outline"))) btnErase.classList.add("outline");
+});
+
+btnErase.addEventListener("click", () => {
+    btnErase.classList.remove("outline");
+    if (!(btnRainbow.classList.contains("outline"))) btnRainbow.classList.add("outline");
+});
+
+btnClear.addEventListener("click", () => {
+    btnClear.classList.remove("outline");
+    setTimeout(() => btnClear.classList.add("outline"), 200);
+    clearGrid();
+    changeSize(sizeRange.getAttribute("value"));
 });
 
 gridContainer.addEventListener("mousedown", downListener);

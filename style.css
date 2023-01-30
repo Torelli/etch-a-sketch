@@ -74,3 +74,8 @@ body>main {
 .square {
     border: 1px dotted var(--modal-overlay-background-color);
 }
+
+.options {
+    margin: 0;
+    padding: calc(1rem * 2) 1rem;
+}
