@@ -117,6 +117,7 @@ btnErase.addEventListener("click", () => {
 });
 
 btnClear.addEventListener("click", () => {
+    gridIcon.classList.replace("fa-eye-slash","fa-eye");
     btnClear.classList.remove("outline");
     setTimeout(() => btnClear.classList.add("outline"), 200);
     clearGrid();
