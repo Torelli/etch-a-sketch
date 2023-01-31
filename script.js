@@ -92,6 +92,7 @@ sizeRange.addEventListener("mousemove", (e) => {
 });
 
 sizeRange.addEventListener("change", (e) => {
+    gridIcon.classList.replace("fa-eye-slash","fa-eye")
     sizeRange.setAttribute("value",e.target.value);
     clearGrid();
     changeSize(e.target.value);
