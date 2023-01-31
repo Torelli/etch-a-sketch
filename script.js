@@ -127,6 +127,7 @@ btnClear.addEventListener("click", () => {
 
 btnColor.addEventListener("mouseover", () => {
     if(btnColor.classList.contains("outline")) colorContainer.setAttribute("style","left: 215px;");
+    color = colorInput.value;
 });
 
 btnColor.addEventListener("mouseout", () => {
